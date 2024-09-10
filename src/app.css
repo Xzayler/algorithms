@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 8, 8, 16;
+  --color-foreground: 232, 220, 240;
+  --color-foreground-faint: 113 118 123; /* #536471 */
+  --color-ui: 47 51 54; /* #EFF3F4 */
+  --color-highlight: 22 24 28; /* #F7F9F9 */
+  --color-highlightextra: 29 31 35;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255;
+  }
+} */
+
+body {
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+}
