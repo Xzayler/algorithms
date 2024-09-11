@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 
-import { encode, EncodingData } from '~/algos/LWZEncoder';
+import { encode, EncodingData } from '~/algos/LZWEncoder';
 
 import Container from '~/components/shared/Container';
 import EncodingTable from '~/components/encoding/EncodingTable';
@@ -58,7 +58,7 @@ export default function LZWEndoding() {
               </Switch>
               <Button
                 onClick={handleSubmit}
-                class=" font-bold text-lg py-2 px-3 rounded-xl hover:bg-opacity-70 transition-opacity bg-sky-700 peer-data-[checked]:bg-amber-700"
+                class=" font-bold text-lg py-2 px-3 rounded-xl transition-opacity bg-sky-700 peer-data-[checked]:bg-amber-700 hover:!bg-opacity-70 "
               >
                 {mode() ? 'Decode' : 'Encode'}
               </Button>
