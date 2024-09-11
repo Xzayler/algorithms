@@ -20,7 +20,9 @@ export default function LZWEndoding() {
     if (mode()) {
       setOutput('decoded message');
     } else {
-      setOutput('encoded message');
+      const { codedStr, table } = encode(input());
+      setTableData(table);
+      setOutput(codedStr);
     }
   }
 
