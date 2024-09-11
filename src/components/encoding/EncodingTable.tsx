@@ -1,5 +1,5 @@
 import { For } from 'solid-js';
-import type { EncodingData } from '~/algos/LWZEncoder';
+import type { EncodingData } from '~/algos/LZWEncoder';
 import EncodingTableRow from './EncodingTableRow';
 
 /**
