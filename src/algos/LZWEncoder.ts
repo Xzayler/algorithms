@@ -35,7 +35,6 @@ export function encode(string: string): {
   const initialTable: EncodingData = initialiseEncodingTable(string);
   const table: EncodingData = structuredClone(initialTable);
 
-  // Keep track of number of strings in the table to assign incremental ID values.
   let tableLength: number = Object.keys(table).length;
 
   const codes: number[] = [];
@@ -47,19 +46,17 @@ export function encode(string: string): {
     let currStr = string.charAt(i);
     let nextStr = currStr + string.charAt(++i);
 
-    // If the nextStr substring has already been assigned a code, use that as the new base
     while (i < l && table[nextStr] !== undefined) {
       currStr = nextStr;
       nextStr = currStr + string.charAt(++i);
     }
+
     codes.push(table[currStr]);
-    // Only add the new substring to the table if i-th index exists in string.
     if (i !== l) {
       table[nextStr] = ++tableLength;
     }
   }
 
-  // Build the output string from initialTable and the codes
   let codedStr = '{ ';
   for (let [key, val] of Object.entries(initialTable)) {
     codedStr += `${key}: ${val}, `;
@@ -71,6 +68,12 @@ export function encode(string: string): {
   return { codedStr, table };
 }
 
+/**
+ * Decodes a message encoded with the LZW algorithm, given it is provided a correct decoding table
+ * @param {string} string The coded message to decode. This should be a list of numbers separated by commas.
+ * @param {DecodingData} arr An array containing the initial coded strings for which
+ * @returns {{decodedStr: string, table: EncodingData}} decodedStr is the decoded output. table is the full table created during the decoding process
+ */
 export function decode(
   string: string,
   arr: DecodingData,
