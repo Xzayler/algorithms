@@ -9,12 +9,12 @@ import EncodingTableRow from './EncodingTableRow';
  */
 export default function EncodingTable(props: { data: EncodingData }) {
   return (
-    <div class="w-max mx-auto h-[80dvh] overflow-y-auto border border-ui scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-ui scrollbar-track-transparent ">
+    <div class="w-max mx-auto h-full overflow-y-auto overflow-x-auto max-w-full scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-ui scrollbar-track-transparent ">
       <table class="bg-highlight border-separate border-spacing-0 gap-0 h-full">
         <thead class="sticky top-0 bg-highlightextra ">
           <tr>
-            <th class="border border-ui px-2 py-1">String</th>
-            <th class="border border-ui px-2 py-1">Code</th>
+            <th class="border border-ui p-1 w-16 max-w-16">String</th>
+            <th class="border border-ui p-1">Code</th>
           </tr>
         </thead>
         <tbody class="max-h-[200px] h-[200px] overflow-hidden">

@@ -63,8 +63,11 @@ export default function LZWEndoding() {
   return (
     <main class="h-dvh flex items-center">
       <Container>
-        <div class="grid grid-cols-[fit-content(14rem),1fr] grid-rows-2 gap-3">
-          <div class=" row-span-2 min-w-[7.5rem]">
+        <div class="my-8">
+          <h1 class="text-center text-xl font-bold">LZW Encoding</h1>
+        </div>
+        <div class="grid grid-cols-[fit-content(14rem),1fr] grid-rows-2 gap-3 min-h-[80dvh] max-h-[80dvh]">
+          <div class=" row-span-2 min-w-[7.5rem] max-w-32">
             <EncodingTable data={tableData()} />
           </div>
 
@@ -76,13 +79,18 @@ export default function LZWEndoding() {
                 class="flex flex-col h-full w-full"
               >
                 <TextField.Label>
-                  {'Insert text to ' + (mode() ? 'Decode' : 'Encode')}
+                  {'Text to ' + (mode() ? 'Decode' : 'Encode')}
                 </TextField.Label>
-                <TextField.TextArea class="p-1 grow border border-ui rounded-md text-foreground bg-background resize-none scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-ui scrollbar-track-transparent" />
+                <TextField.TextArea
+                  placeholder={
+                    mode() ? '{ a: 1, b: 2, c: 3 }\n1,2,4,3,4,8' : 'ababcababa'
+                  }
+                  class="p-1 grow border border-ui rounded-md text-foreground bg-background resize-none scrollbar-thin scrollbar-corner-transparent scrollbar-thumb-ui scrollbar-track-transparent"
+                />
               </TextField>
             </div>
 
-            <div class="flex items-center gap-2 flex-wrap">
+            <div class="flex items-center justify-center gap-2 flex-wrap">
               <Switch
                 class="flex flex-col items-center peer"
                 onChange={(isChecked: boolean) => {
