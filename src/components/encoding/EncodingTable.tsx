@@ -14,10 +14,10 @@ export default function EncodingTable(props: { data: EncodingData }) {
         <thead class="sticky top-0 bg-highlightextra ">
           <tr>
             <th class="border border-ui p-1 w-16 max-w-16">String</th>
-            <th class="border border-ui p-1">Code</th>
+            <th class="border border-ui p-1 w-12 max-w-12">Code</th>
           </tr>
         </thead>
-        <tbody class="max-h-[200px] h-[200px] overflow-hidden">
+        <tbody>
           <For each={Object.entries(props.data)}>
             {(item) => {
               return EncodingTableRow(item);
