@@ -2,6 +2,8 @@ export type EncodingData = {
   [key: string]: number;
 };
 
+export type DecodingData = string[];
+
 /**
  * Will create an object with all the characters as keys having been assigned an incremental id
  * @param {string} string The message to be encoded
@@ -67,4 +69,51 @@ export function encode(string: string): {
   codedStr += String(codes);
 
   return { codedStr, table };
+}
+
+export function decode(
+  string: string,
+  arr: DecodingData,
+): { decodedStr: string; table: EncodingData } {
+  if (string.length === 0) throw new Error('Input string is empty');
+  if (arr.length === 0) throw new Error('Input decoding table is empty');
+
+  const codeArray = string.split(',');
+
+  if (Number(codeArray[0]) >= arr.length) {
+    throw new Error("First code isn't in the provided table");
+  }
+
+  let currStr: string = arr[Number(codeArray[0]) - 1];
+  const decodedStrs: string[] = [currStr];
+  let prevStr: string = currStr;
+
+  const l = codeArray.length;
+  for (let i = 1; i < l; i++) {
+    const code = Number(codeArray[i]);
+    if (code <= arr.length) {
+      currStr = arr[code - 1];
+      const newStr = prevStr.concat(currStr.charAt(0));
+      arr.push(newStr);
+    } else {
+      const newStr = prevStr.concat(currStr.charAt(0));
+      arr.push(newStr);
+      currStr = arr[code - 1];
+    }
+    console.log(arr);
+    decodedStrs.push(currStr);
+    prevStr = currStr;
+  }
+
+  const decodingTable = arrayToTable(arr);
+
+  return { decodedStr: decodedStrs.join(''), table: decodingTable };
+}
+
+function arrayToTable(arr: DecodingData): EncodingData {
+  const table: EncodingData = {};
+  arr.forEach((str, i) => {
+    table[str] = i + 1;
+  });
+  return table;
 }
