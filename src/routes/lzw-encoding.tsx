@@ -7,7 +7,7 @@ import EncodingTable from '~/components/encoding/EncodingTable';
 import { TextField } from '@kobalte/core/text-field';
 import { Button } from '@kobalte/core/button';
 import { Switch } from '@kobalte/core/switch';
-import { delimiter } from 'vinxi/dist/types/lib/path';
+import { Link } from '@kobalte/core/link';
 
 export default function LZWEndoding() {
   const [tableData, setTableData] = createSignal<EncodingData>({});
@@ -29,7 +29,6 @@ export default function LZWEndoding() {
     const codes: string[] = codeStr.split(', ');
     console.log(codes);
     const decodingData: string[] = [];
-    // const decodingData: string[] = new Array(codes.length);
     for (const val of codes) {
       const [str, index] = val.split(': ', 2);
       decodingData.splice(Number(index) - 1, 0, str);
@@ -63,11 +62,16 @@ export default function LZWEndoding() {
   return (
     <main class="h-dvh flex items-center">
       <Container>
-        <div class="my-8">
+        <div class="my-8 flex flex-col items-center">
           <h1 class="text-center text-xl font-bold">LZW Encoding</h1>
+          <div class="flex gap-2 justify-evenly items-center">
+            <Link href="https://github.com/Xzayler/algorithms/blob/main/src/algos/LZWEncoder.ts">
+              Github
+            </Link>
+          </div>
         </div>
-        <div class="grid grid-cols-[fit-content(14rem),1fr] grid-rows-2 gap-3 min-h-[80dvh] max-h-[80dvh]">
-          <div class=" row-span-2 min-w-[7.5rem] max-w-32">
+        <div class="grid grid-cols-[fit-content(8rem),1fr] grid-rows-2 gap-3 min-h-[80dvh] max-h-[80dvh]">
+          <div class=" row-span-2">
             <EncodingTable data={tableData()} />
           </div>
 
